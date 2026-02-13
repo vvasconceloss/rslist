@@ -4,9 +4,11 @@ pub mod introduction;
 
 use std::env;
 
-use crate::introduction::print_usage;
+use crate::introduction::{print_introduction, print_usage};
 
 fn main() {
+    print_introduction();
+
     let args: Vec<String> = env::args().collect();
 
     if args.len() < 3 {

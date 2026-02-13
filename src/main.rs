@@ -1,22 +1,27 @@
 pub mod commands;
 pub mod errors;
+pub mod introduction;
 
 use std::env;
 
-use crate::commands::Commands;
+use crate::introduction::print_usage;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    if args.len() < 2 {
-        println!("Usage: rslist <command>");
+    if args.len() < 3 {
+        print_usage();
         return;
     }
 
-    let command = Commands::from(&args[2].to_string());
+    let command_line = &args[2];
 
-    match command {
-        Commands::Test => println!("Test Command"),
-        _ => panic!("Invalid command"),
+    match command_line.as_str() {
+        "test" => println!("Test Command"),
+        "config" => println!("Config Command"),
+        other_command => {
+            print_usage();
+            println!("Unknown command: {}", other_command);
+        }
     }
 }

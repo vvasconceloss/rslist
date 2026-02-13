@@ -7,6 +7,12 @@ use crate::commands::Commands;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    if args.len() < 2 {
+        println!("Usage: rslist <command>");
+        return;
+    }
+
     let command = Commands::from(&args[2].to_string());
 
     match command {
